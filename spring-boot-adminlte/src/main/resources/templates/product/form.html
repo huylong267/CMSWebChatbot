@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Sản phẩm</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Sản phẩm</h1>
+    <ol class="breadcrumb">
+        <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Sản phẩm</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Form</h3>
+            <div class="box-tools pull-right">
+                <a href="/product" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${product}" th:action="@{/product/save}" method="post"
+              enctype="multipart/form-data">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="img-select-block margin-bottom-15 ">
+                            <label>Ảnh</label><br/>
+                            <th:block th:if="${product.id == null || product.id ==0}">
+                                <img class="img-thumbnail" id="preview-product-img"
+                                     src="/dist/img/default.png"/>
+                                <input type='file' name="file" id="input-select-img-product" required="true"/>
+                            </th:block>
+                            <th:block th:unless="${product.id == null || product.id ==0}">
+                                <img class="img-thumbnail" id="preview-product-img"
+                                     th:src="${product.img}"/>
+                                <input type='file' name="file" id="input-select-img-product"/>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="name">Tên</label>
+                        <input type="text" required="true" class="form-control" th:field="*{name}" id="name"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="price">Giá tiền</label>
+                        <input type="text" required="true" class="form-control" th:field="*{price}" id="price"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="category">Danh mục</label>
+                        <select class="form-control" th:field="*{category}" id="category">
+                            <th:block th:each="c :${category}">
+                                <option th:value="${c.getId()}" th:text="${c.getName()}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary" type="submit">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

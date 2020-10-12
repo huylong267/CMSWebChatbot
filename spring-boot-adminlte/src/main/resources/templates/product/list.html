@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Sản phẩm</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Sản phẩm</h1>
+<ol class="breadcrumb">
+    <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Danh sách sản phẩm</li>
+</ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Danh sách</h3>
+            <div class="box-tools pull-right">
+                <a href="/product/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Ảnh</th>
+                    <th>Tên</th>
+                    <th>Danh mục</th>
+                    <th>Giá tiền</th>
+                    <th>Ngày tạo</th>
+                    <th>Ngày cập nhật</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                    <td><img th:src="${row.img}" alt="" class="img-bordered" style="height: 80px; width: 100px;"></td>
+                    <td th:text="${row.name}"></td>
+                    <td th:text="${row.category.name}"></td>
+                    <td th:text="${#numbers.formatDecimal(row.price, 0, 'COMMA', 0, 'POINT')}"></td>
+                    <td th:text="${#dates.format(row.createDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#dates.format(row.lastUpdate, 'dd/MM/yyyy')}"></td>
+                    <td th:if="${row.status == 1}">Đang hoạt động</td>
+                    <td th:if="${row.status == 2}">Ngừng hoạt động</td>
+
+                    <td>
+                        <a th:href="${'/product/edit/' + row.id}">Sửa</a> |
+                        <a th:href="${'/product/delete/' + row.id}">Xóa</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="/customers/1">Trang đầu</a></li>
+                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+                    <a th:href="${'/product/' + p}" th:text="${p}"></a>
+                </li>
+                <li><a th:href="${'/product/' + endIndex}">Trang cuối</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

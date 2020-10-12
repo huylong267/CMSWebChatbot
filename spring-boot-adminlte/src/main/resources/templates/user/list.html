@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Nhân viên</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Nhân viên</h1>
+<ol class="breadcrumb">
+    <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Nhân viên</li>
+</ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lists</h3>
+            <div class="box-tools pull-right">
+                <a href="/user/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Ngày tạo</th>
+                    <th>Ngày cập nhật</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.fullName}"></td>
+                    <td th:text="${row.email}"></td>
+                    <td th:text="${row.userName}"></td>
+                    <td th:text="${#dates.format(row.createDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#dates.format(row.lastUpdate, 'dd/MM/yyyy')}"></td>
+                    <td th:if="${row.status == 1}">Đang hoạt động</td>
+                    <td th:if="${row.status == 2}">Ngừng hoạt động</td>
+                    <td>
+                        <a th:href="${'/user/edit/' + row.id}">Sửa</a> |
+                        <a th:href="${'/user/delete/' + row.id}">Xóa</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="/customers/1">First</a></li>
+                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+                    <a th:href="${'/user/' + p}" th:text="${p}"></a>
+                </li>
+                <li><a th:href="${'/user/' + endIndex}">Last</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
