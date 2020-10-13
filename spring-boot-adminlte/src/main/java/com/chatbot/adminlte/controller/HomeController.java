@@ -17,7 +17,7 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String home (@RequestParam(value = "msid",required = false) String msid, Model model){
+    public String home (@RequestParam(value = "mid",required = false) String msid, Model model){
         List<Product> list = productService.findWithOutStatusDelete();
         model.addAttribute("list",list);
         return "webchatbot";
