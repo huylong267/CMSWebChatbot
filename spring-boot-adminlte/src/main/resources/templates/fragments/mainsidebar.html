@@ -1,4 +1,7 @@
 <!-- sidebar: style can be found in sidebar.less -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <section class="sidebar" th:fragment="sidebar">
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
@@ -60,7 +63,7 @@
                 <li><a href="/category"><i class="fa fa-circle-o"></i> Danh sách danh mục</a></li>
             </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview" sec:authorize="hasRole('ADMIN')"s>
             <a href="#">
                 <i class="fa fa-folder"></i>
                 <span>Nhân viên</span>
@@ -73,8 +76,7 @@
                 <li><a href="/user"><i class="fa fa-circle-o"></i> Danh sách nhân viên</a></li>
             </ul>
         </li>
-
-        <li class="treeview">
+        <li class="treeview" sec:authorize="hasRole('ADMIN')">
             <a href="#">
                 <i class="fa fa-folder"></i>
                 <span>Quyền</span>
@@ -87,6 +89,7 @@
                 <li><a href="/role"><i class="fa fa-circle-o"></i> Danh sách quyền</a></li>
             </ul>
         </li>
+
     </ul>
 </section>
 <!-- /.sidebar -->
