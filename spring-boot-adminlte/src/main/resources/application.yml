@@ -26,9 +26,9 @@ spring:
     enabled: true
     encoding: UTF-8
     mode: HTML
-    #    prefix: classpath:/templates/
-    prefix: file:src/main/resources/templates/
-    #    prefix: ${project.basedir}/src/main/resources/templates/
+    prefix: classpath:/templates/
+    #prefix: file:src/main/resources/templates/
+    #prefix: ${project.basedir}/src/main/resources/templates/
     suffix: .html
     # excluded-view-names:
     # template-resolver-order:
@@ -40,8 +40,9 @@ spring:
       enabled: true
     add-properties: true
   resources:
-    static-locations: file:src/main/resources/static/
-    #    static-locations: ${project.basedir}/src/main/resources/static/
+    #static-locations: file:src/main/resources/static/
+    #static-locations: ${project.basedir}/src/main/resources/static/
+    static-locations: classpath:/static/
     cache:
       period: 0
   servlet:
@@ -62,6 +63,7 @@ server:
     session:
       cookie:
         http-only: true
+  port: 8668
 #        secure: true
 
 # 1 days = 1 * 24 * 60 * 60

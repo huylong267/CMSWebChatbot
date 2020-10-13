@@ -1,6 +1,7 @@
 package com.chatbot.adminlte.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Product extends AbstractModel<Long>{
     private long price;
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name ="category_id")
+    @JsonIgnore
     private Category category;
 
 

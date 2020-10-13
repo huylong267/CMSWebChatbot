@@ -28,4 +28,30 @@ public interface Constanst {
             this.description = description;
         }
     }
+
+    enum RESPONSE {
+
+        SUCCESS("00","Thanh cong"),
+        FAIL("01","That bai");
+        private final String code;
+        private final String description;
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        @Override
+        public String toString() {
+            return "code=" + code + ", description=" + description;
+        }
+
+        RESPONSE(String value, String description) {
+            this.code = value;
+            this.description = description;
+        }
+    }
 }
