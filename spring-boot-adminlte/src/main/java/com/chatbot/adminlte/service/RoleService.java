@@ -24,7 +24,12 @@ public class RoleService extends AbstractService<Role, Long> {
         return roleRepository.findByName(name);
     }
 
-    public List<Role> getallRole() {
+    public List<Role> findRoleNotExistOfUser(int id) {
+        return roleRepository.findRoleNotExistOfUser(id);
+    }
+
+    public List<Role> findAll() {
         return roleRepository.findAll();
     }
+
 }

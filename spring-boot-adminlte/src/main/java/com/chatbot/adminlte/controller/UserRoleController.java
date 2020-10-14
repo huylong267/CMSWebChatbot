@@ -29,20 +29,22 @@ public class UserRoleController {
     private UserRoleService userRoleService;
 
     @GetMapping("/role-control/{id}")
-    public String roleControl(@PathVariable Long id, Model model) {
+    public String roleControl(@PathVariable int id, Model model) {
         Optional<User> checkUser =  userService.findById(id);
-        List<Role> listAllRole = roleService.getallRole();
+        List<Role> listAll = roleService.findAll();
+        List<Role> listRoleNotExistOfUser = roleService.findRoleNotExistOfUser(id);
         List<UserRole> listUserRoleById = userRoleService.findRoleIdByUserId(checkUser.get().getId());
         for (UserRole userRole:listUserRoleById) {
-            for (Role role:listAllRole) {
+            for (Role role:listAll) {
                 if(userRole.getRoleId().equals(role.getId())){
                     userRole.setRole(role.getName());
                 }
             }
         }
+
         checkUser.ifPresent(user -> model.addAttribute("name", user.getUserName()));
         checkUser.ifPresent(user -> model.addAttribute("id", user.getId()));
-        model.addAttribute("listAllRole", listAllRole);
+        model.addAttribute("listRoleNotExistOfUser", listRoleNotExistOfUser);
         model.addAttribute("listUserRoleById", listUserRoleById);
         return "user-role/list";
 

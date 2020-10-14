@@ -3,7 +3,26 @@
       layout:decorate="layout">
 <head>
     <title>Phân quyền</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/dist/js/user-role.js"></script>
+<style>
+    .dual-list .list-group {
+    margin-top: 8px;
+}
+
+.list-left li, .list-right li {
+    cursor: pointer;
+}
+
+.list-arrows {
+    padding-top: 100px;
+}
+
+.list-arrows button {
+    margin-bottom: 20px;
+}</style>
 
 </head>
 <body>
@@ -54,6 +73,69 @@
                     </td>
                 </tr>
             </table>-->
+            <br />
+            <div class="row">
+
+                <div class="dual-list list-left col-md-5">
+                    <div class="well text-right">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <th:block th:each="role:${listRoleNotExistOfUser}">
+                                <li class="list-group-item"
+                                    th:text="${role.getName()}"></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="list-arrows col-md-1 text-center">
+                    <button class="btn btn-default btn-sm move-left">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+
+                    <button class="btn btn-default btn-sm move-right">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </div>
+
+                <div class="dual-list list-right col-md-5">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-group" th:name="duallistboxedit">
+
+                            <th:block th:each="role:${listUserRoleById}">
+                                <li class="list-group-item"
+                                    th:text="${role.getRole()}"></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
         <div class="box-footer clearfix">
@@ -61,5 +143,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

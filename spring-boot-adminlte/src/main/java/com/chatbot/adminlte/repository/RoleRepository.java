@@ -19,4 +19,5 @@ public interface RoleRepository extends JpaRepository<Role,Long> {
     @Query(value = "SELECT * FROM  role WHERE  id  IN (SELECT role_id FROM user_role  WHERE user_id =:userId)",nativeQuery = true)
     List<Role> findRoleExistOfUser(@Param("userId") int userId);
 
+
 }

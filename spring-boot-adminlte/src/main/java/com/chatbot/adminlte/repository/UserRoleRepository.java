@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface UserRoleRepository extends JpaRepository<UserRole,Long> {
     @Query(value = "select * from user_role", nativeQuery = true)
     ArrayList<UserRole> findUserRole();
-    @Query(value = "select * from user_role  where user_id=:userId", nativeQuery = true)
+    @Query(value = "select * from user_role ur  where user_id=:userId", nativeQuery = true)
     ArrayList<UserRole> findRoleIdByUserId(@Param("userId") long userId);
 
 }
