@@ -2,6 +2,7 @@ package com.chatbot.adminlte.controller;
 
 import com.chatbot.adminlte.model.Role;
 import com.chatbot.adminlte.model.User;
+import com.chatbot.adminlte.model.UserRole;
 import com.chatbot.adminlte.service.RoleService;
 import com.chatbot.adminlte.service.UserRoleService;
 import com.chatbot.adminlte.service.UserService;
@@ -31,10 +32,19 @@ public class UserRoleController {
     public String roleControl(@PathVariable Long id, Model model) {
         Optional<User> checkUser =  userService.findById(id);
         List<Role> listAllRole = roleService.getallRole();
-
+        List<UserRole> listUserRoleById = userRoleService.findRoleIdByUserId(checkUser.get().getId());
+        for (UserRole userRole:listUserRoleById) {
+            for (Role role:listAllRole) {
+                if(userRole.getRoleId().equals(role.getId())){
+                    userRole.setRole(role.getName());
+                }
+            }
+        }
         checkUser.ifPresent(user -> model.addAttribute("name", user.getUserName()));
-        model.addAttribute("role", roleService.get(id));
-        return "role/form";
+        checkUser.ifPresent(user -> model.addAttribute("id", user.getId()));
+        model.addAttribute("listAllRole", listAllRole);
+        model.addAttribute("listUserRoleById", listUserRoleById);
+        return "user-role/list";
 
     }
 
