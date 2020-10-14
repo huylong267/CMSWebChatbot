@@ -125,14 +125,15 @@ $(document).ready(function () {
 
 			data += productName + '-Topping: ' + topping + '-Số lượng : ' + quantity + '-Tổng tiền: ' + (parseInt(quantity) * parseInt(Number(price.replace(/[^\d.]/g, '')))) + " \n";
 		})
-		axios.post(' https://ahachat.com/api/bots/12404829/users/'+mid+'/send', {
-			ahachat_token: '53da21bea032562f54883db2f15f0cd7a084cfdd598aa21e25a275eefd0858fa',
+		axios.post(' https://ahachat.com/api/bots/12863167/users/'+mid+'/send', {
+			ahachat_token: '2eb6146b2cdc6f4903cb44a0749d54336b4d1a7980e9ce3ba5c6d3c2fd537648',
 			ahachat_message_tag: 'NON_PROMOTIONAL_SUBSCRIPTION',
-			ahachat_block_name: 'xacnhan',
-			tenmon: data
+			ahachat_block_name: 'block_1',
+			DTBmonan: data
 		})
 			.then((response) => {
 				console.log(response);
+				window.close();
 			}, (error) => {
 				console.log(error);
 			});

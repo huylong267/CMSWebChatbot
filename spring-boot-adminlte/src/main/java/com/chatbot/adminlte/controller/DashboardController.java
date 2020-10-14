@@ -10,7 +10,7 @@ public class DashboardController {
 
     @GetMapping("/")
     public String test(){
-        return "login";
+        return "redirect:/login";
     }
     @GetMapping("/dashboard")
     public String dashboard(HttpSession httpSession){
