@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService extends AbstractService<User, Long> {
 
@@ -17,13 +19,17 @@ public class UserService extends AbstractService<User, Long> {
         return userRepository;
     }
 
-    public User findByUserName(String userName){
+    public User findByUserName(String userName) {
         try {
             return userRepository.findByUsername(userName);
         } catch (Exception e) {
             e.printStackTrace();
             return new User();
         }
+    }
+
+    public Optional<User> findById(long id) {
+        return userRepository.findById(id);
     }
 
 }

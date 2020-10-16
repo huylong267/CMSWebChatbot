@@ -11,6 +11,16 @@ public class UserRole  extends AbstractModel<Long>{
     @Column(name = "role_id")
     private Long roleId;
 
+    @Transient
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public Long getUserId() {
         return userId;

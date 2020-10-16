@@ -2,8 +2,10 @@ package com.chatbot.adminlte.controller;
 
 import com.chatbot.adminlte.model.Category;
 import com.chatbot.adminlte.model.Role;
+import com.chatbot.adminlte.model.User;
 import com.chatbot.adminlte.service.CategoryService;
 import com.chatbot.adminlte.service.RoleService;
+import com.chatbot.adminlte.service.UserService;
 import com.chatbot.adminlte.util.Constanst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("role")
@@ -23,6 +27,8 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String index() {

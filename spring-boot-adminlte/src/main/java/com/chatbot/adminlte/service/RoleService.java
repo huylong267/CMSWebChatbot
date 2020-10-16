@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RoleService extends AbstractService<Role, Long> {
 
@@ -18,7 +20,16 @@ public class RoleService extends AbstractService<Role, Long> {
     }
 
 
-    public Role  findByName(String name ){
+    public Role findByName(String name) {
         return roleRepository.findByName(name);
     }
+
+    public List<Role> findRoleNotExistOfUser(int id) {
+        return roleRepository.findRoleNotExistOfUser(id);
+    }
+
+    public List<Role> findAll() {
+        return roleRepository.findAll();
+    }
+
 }
