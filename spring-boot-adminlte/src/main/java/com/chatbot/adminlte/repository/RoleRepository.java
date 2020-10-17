@@ -11,13 +11,13 @@ public interface RoleRepository extends JpaRepository<Role,Long> {
     Role findByName(String name);
 
     @Query(value = "select * from role  where id = :id", nativeQuery = true)
-    Role findRoleById(@Param("id") int id);
+    Role findRoleById(@Param("id") Long id);
 
     @Query(value = "SELECT * FROM  role WHERE  id NOT IN (SELECT role_id FROM user_role  WHERE user_id =:userId)",nativeQuery = true)
-    List<Role> findRoleNotExistOfUser(@Param("userId") int userId);
+    List<Role> findRoleNotExistOfUser(@Param("userId") Long userId);
 
     @Query(value = "SELECT * FROM  role WHERE  id  IN (SELECT role_id FROM user_role  WHERE user_id =:userId)",nativeQuery = true)
-    List<Role> findRoleExistOfUser(@Param("userId") int userId);
+    List<Role> findRoleExistOfUser(@Param("userId") Long userId);
 
 
 }

@@ -3,7 +3,7 @@
       layout:decorate="layout">
 <head>
     <title>Phân quyền</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="/dist/js/user-role.js"></script>
@@ -43,103 +43,78 @@
             </div>
         </div>
         <div class="box-body no-padding">
-            <h1 th:text="${name}"></h1>
-            <p th:type="hidden" th:value="${id}"></p>
 
-            <!--<table class="table table-striped">
-                <tr>
-                    <th>ID</th>
-                    <th>Tên</th>
-                    <th>Email</th>
-                    <th>Username</th>
-                    <th>Ngày tạo</th>
-                    <th>Ngày cập nhật</th>
-                    <th>Trạng thái</th>
-                    <th></th>
-                </tr>
-                <tr th:each="row : ${list}">
-                    <td th:text="${row.id}"></td>
-                    <td th:text="${row.fullName}"></td>
-                    <td th:text="${row.email}"></td>
-                    <td th:text="${row.userName}"></td>
-                    <td th:text="${#dates.format(row.createDate, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${#dates.format(row.lastUpdate, 'dd/MM/yyyy')}"></td>
-                    <td th:if="${row.status == 1}">Đang hoạt động</td>
-                    <td th:if="${row.status == 2}">Ngừng hoạt động</td>
-                    <td>
-                        <a th:href="${'/user/edit/' + row.id}">Sửa</a> |
-                        <a th:href="${'/user/delete/' + row.id}">Xóa</a>
-                        <a th:href="${'/userRole/role-control/' + row.id}">Phân Quyền</a>
-                    </td>
-                </tr>
-            </table>-->
-            <br />
-            <div class="row">
+            <div class="container">
+                <h1 th:text="${name}" id="username-set-role"></h1>
+                <p th:type="hidden" th:value="${id}"></p>
+                <br/>
+                <div class="row">
 
-                <div class="dual-list list-left col-md-5">
-                    <div class="well text-right">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon glyphicon glyphicon-search"></span>
-                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                    <div class="dual-list list-left col-md-5">
+                        <div class="well text-right">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                        <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="btn-group">
+                                        <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="btn-group">
-                                    <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
-                                </div>
-                            </div>
+                            <ul class="list-group">
+                                <th:block th:each="role:${listRoleNotExistOfUser}">
+                                    <li class="list-group-item"
+                                        th:text="${role.getName()}"></li>
+                                </th:block>
+                            </ul>
                         </div>
-                        <ul class="list-group">
-                            <th:block th:each="role:${listRoleNotExistOfUser}">
-                                <li class="list-group-item"
-                                    th:text="${role.getName()}"></li>
-                            </th:block>
-                        </ul>
                     </div>
-                </div>
 
-                <div class="list-arrows col-md-1 text-center">
-                    <button class="btn btn-default btn-sm move-left">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </button>
+                    <div class="list-arrows col-md-1 text-center">
+                        <button class="btn btn-default btn-sm move-left">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </button>
 
-                    <button class="btn btn-default btn-sm move-right">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </button>
-                </div>
+                        <button class="btn btn-default btn-sm move-right">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </div>
 
-                <div class="dual-list list-right col-md-5">
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="btn-group">
-                                    <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                    <div class="dual-list list-right col-md-5">
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="btn-group">
+                                        <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
-                                    <span class="input-group-addon glyphicon glyphicon-search"></span>
-                                </div>
-                            </div>
+                            <ul class="list-group ul-list-selected" th:name="duallistboxedit">
+
+                                <th:block th:each="role:${listUserRoleById}">
+                                    <li class="list-group-item li-list-selected"
+                                        th:text="${role.getRole()}"></li>
+                                </th:block>
+                            </ul>
                         </div>
-                        <ul class="list-group" th:name="duallistboxedit">
-
-                            <th:block th:each="role:${listUserRoleById}">
-                                <li class="list-group-item"
-                                    th:text="${role.getRole()}"></li>
-                            </th:block>
-                        </ul>
                     </div>
-                </div>
 
+                </div>
             </div>
 
         </div>
-        <div class="box-footer clearfix">
-
+        <div class="box-footer">
+            <button class="btn btn-primary" type="submit" id="control-user-role">Save</button>
         </div>
     </div>
 </div>

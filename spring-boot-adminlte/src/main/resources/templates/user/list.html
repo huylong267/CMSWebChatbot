@@ -44,7 +44,7 @@
                     <td th:if="${row.status == 2}">Ngừng hoạt động</td>
                     <td>
                         <a th:href="${'/user/edit/' + row.id}">Sửa</a> |
-                        <a th:href="${'/user/delete/' + row.id}">Xóa</a>
+                        <a th:href="${'/user/delete/' + row.id}">Xóa</a> |
                         <a th:href="${'/userRole/role-control/' + row.id}">Phân Quyền</a>
                     </td>
                 </tr>

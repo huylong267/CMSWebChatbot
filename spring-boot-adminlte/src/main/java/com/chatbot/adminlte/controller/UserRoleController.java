@@ -29,7 +29,7 @@ public class UserRoleController {
     private UserRoleService userRoleService;
 
     @GetMapping("/role-control/{id}")
-    public String roleControl(@PathVariable int id, Model model) {
+    public String roleControl(@PathVariable long id, Model model) {
         Optional<User> checkUser =  userService.findById(id);
         List<Role> listAll = roleService.findAll();
         List<Role> listRoleNotExistOfUser = roleService.findRoleNotExistOfUser(id);
