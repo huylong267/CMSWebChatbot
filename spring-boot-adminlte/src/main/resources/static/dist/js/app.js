@@ -775,29 +775,4 @@ $(document).ready(function () {
 
     $('#demo').multiselect();
 
-    $('#control-user-role').click(function () {
-        var arr = [];
-        $('.ul-list-selected').each(function () {// id of ul
-            $(this).find('li').each(function () {
-                arr.push($(this).text());
-            });
-        });
-        debugger;
-        var userName = $('#username-set-role').text();
-        var data = {};
-        data.arr = arr;
-        data.userName = userName;
-        var linkPost = "/api/role/update/set-role";
-        axios.post(linkPost, data).then((response) => {
-                if (response.data.errorCode === '00') {
-                    alert("Thành công");
-                    window.location.reload();
-                } else {
-                    alert("Thất bại: " + response.data.errorDescription);
-                }
-            }, (error) => {
-                alert("Thất bại: " + error);
-            });
-    })
-
 })
