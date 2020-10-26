@@ -91,7 +91,7 @@ public class ProductController {
             Product save = productService.save(productAdd);
         }else {
             Product productExist = productService.get(product.getId());
-            if(imageFile == null){
+            if(imageFile != null){
                 String newFilename = fileStorageService.store(imageFile);
                 productExist.setImg(Constanst.PREFIX_LINK_UPLOAD +newFilename);
             }

@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://203.171.21.93:3306/chatbot?useUnicode=true&characterEncoding=UTF-8&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Jakarta&useSSL=false
-    username: chat_bot
-    password:
+    url: jdbc:mysql://localhost:3306/chatbot?useUnicode=true&characterEncoding=UTF-8&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Jakarta&useSSL=false
+    username: root
+    password: huylong123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true

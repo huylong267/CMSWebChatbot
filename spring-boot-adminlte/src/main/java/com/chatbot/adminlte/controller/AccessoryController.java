@@ -98,7 +98,7 @@ public class AccessoryController {
             Accessory save = accessoryService.save(accessoryAdd);
         }else {
             Accessory accExist = accessoryService.get(accessory.getId());
-            if(imageFile == null){
+            if(imageFile != null){
                 String newFilename = fileStorageService.store(imageFile);
                 accExist.setImg(Constanst.PREFIX_LINK_UPLOAD +newFilename);
             }

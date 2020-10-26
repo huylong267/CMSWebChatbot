@@ -53,7 +53,7 @@ $(document).ready(function () {
                 var items = [];
                 $('#check-list-topping li').remove();
                 data.map((t,index) =>{
-                    items.push('<li> <input type="checkbox" id="p'+index+'" name="cc"  value="'+ t.name+'"><label for="p'+index+'">'+t.name+'</label> <span>'+t.price+'</span></li>')
+                    items.push('<li> <input type="checkbox" id="p'+index+'" name="cc"  value="'+ t.name+'"><label for="p'+index+'">'+t.name+' - </label> <span>'+t.price+'</span></li>')
                 });
                 $('#check-list-topping').append(items.join(''));
 

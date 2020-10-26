@@ -29,16 +29,16 @@ public class SistemApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		User user = new User();
-//		user.setUserName("longph");
-//		user.setFullName("Pham Huy Long");
-//		user.setEmail("h.long195@gmail.com");
-//		user.setPassword(passwordEncoder.encode("123456"));
-//		HashSet<Role> role = new HashSet<>();
-//		role.add(roleRepository.findByName("ROLE_USER"));
-//		role.add(roleRepository.findByName("ROLE_ADMIN"));
-//		user.setRoles(role);
-//		userService.save(user);
+		User user = new User();
+		user.setUserName("longph");
+		user.setFullName("Pham Huy Long");
+		user.setEmail("h.long195@gmail.com");
+		user.setPassword(passwordEncoder.encode("123456"));
+		HashSet<Role> role = new HashSet<>();
+		role.add(roleRepository.findByName("ROLE_USER"));
+		role.add(roleRepository.findByName("ROLE_ADMIN"));
+		user.setRoles(role);
+		userService.save(user);
 
 	}
 }
