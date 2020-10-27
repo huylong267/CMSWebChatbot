@@ -41,7 +41,7 @@ public class RoleService extends AbstractService<Role, Long> {
     @Transactional
     public boolean deleteRoleExist(List<String> roleList, long userId) {
         try {
-            String sql ="delete ur from user_role   ur left join role  r on ur.role_id = r.id where ur.user_id = :userId and r.name  not in (:roleList)";
+            String sql ="delete ur from user_role   ur left join role  r on ur.role_id = r.id where ur.user_id = :userId and r.name not  in (:roleList)";
             Query query = (Query) entityManager.createNativeQuery(sql);
             query.setParameterList("roleList",roleList);
             query.setParameter("userId",userId);
