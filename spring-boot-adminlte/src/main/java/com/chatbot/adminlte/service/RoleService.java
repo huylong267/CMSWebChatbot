@@ -65,5 +65,4 @@ public class RoleService extends AbstractService<Role, Long> {
         }
     }
 
-
 }

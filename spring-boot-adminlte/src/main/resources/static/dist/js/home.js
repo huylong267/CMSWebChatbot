@@ -74,42 +74,46 @@ $(document).ready(function () {
 			modal.style.display = "none";
 		}
 	}
-	$('.btn-addproduct').click(function () {
-		modal.style.display = "none";
-		countCart = $('.count').text()
-		var countInt = parseInt(countCart);
-		countInt += 1;
-		$('.count').text(countInt);
-		var listTopping = []
-		var productName = $('.content-food-name').text();
-		var productPrice = $('.content-food-price').text();
-		var price = Number(productPrice.replace(/[^\d.]/g, ''));
-		var productImg = $('.content-food-img').attr('src');
-		var quantity = $('#updates_1057974864').val();
-        var toppingPrice = 0;
-		$('.check-box-list  input:checked').each(function () {
-			var topping = $(this).val();
-			listTopping.push(topping);
+	// $('.btn-addproduct').click(function () {
+	// 	modal.style.display = "none";
+	// 	countCart = $('.count').text()
+	// 	var countInt = parseInt(countCart);
+	// 	countInt += 1;
+	// 	$('.count').text(countInt);
+	// 	var listTopping = []
+	// 	var productName = $('.content-food-name').text();
+	// 	var productPrice = $('.content-food-price').text();
+	// 	var price = Number(productPrice.replace(/[^\d.]/g, ''));
+	// 	var productImg = $('.content-food-img').attr('src');
+	// 	var quantity = $('#updates_1057974864').val();
+    //     var toppingPrice = 0;
+	// 	$('.check-box-list  input:checked').each(function () {
+	// 		var topping = $(this).val();
+	// 		listTopping.push(topping);
+	//
+    //         var toppingPriceStr  = $(this).nextAll('span').text();
+    //         var toppingPriceNumber = Number(toppingPriceStr.replace(/[^\d.]/g, ''));
+    //         toppingPrice += toppingPriceNumber;
+	// 	});
+    //     var topping = listTopping.join(',');
+	// 	$('.item_2').removeClass('hidden');
+	// 	$('.item-cart_empty').addClass('hidden');
+	// 	 totalPrice = totalPrice +  parseInt(price) * parseInt(quantity)  + toppingPrice * parseInt(quantity);
+	// 	$('#total-view-cart').text(totalPrice);
+	//
+	// 	var $tr = $('<tr class="item_2">').append(
+	// 		"<td> <img class='pro-img-cart'  src='" + productImg + "'/>",
+	// 		$('<td class="pro-title-cart">').text(productName),
+	// 		$('<td class="topping-title-cart">').text(topping.trim()),
+	// 		$('<td class="qty-value">').text(quantity),
+	// 		$('<td class="pro-price-view">').text(productPrice)
+	// 	).appendTo('#clone-item-cart');
+	//
+	// });
 
-            var toppingPriceStr  = $(this).nextAll('span').text();
-            var toppingPriceNumber = Number(toppingPriceStr.replace(/[^\d.]/g, ''));
-            toppingPrice += toppingPriceNumber;
-		});
-        var topping = listTopping.join(',');
-		$('.item_2').removeClass('hidden');
-		$('.item-cart_empty').addClass('hidden');
-		 totalPrice = totalPrice +  parseInt(price) * parseInt(quantity)  + toppingPrice * parseInt(quantity);
-		$('#total-view-cart').text(totalPrice);
 
-		var $tr = $('<tr class="item_2">').append(
-			"<td> <img class='pro-img-cart'  src='" + productImg + "'/>",
-			$('<td class="pro-title-cart">').text(productName),
-			$('<td class="topping-title-cart">').text(topping.trim()),
-			$('<td class="qty-value">').text(quantity),
-			$('<td class="pro-price-view">').text(productPrice)
-		).appendTo('#clone-item-cart');
 
-	});
+
 	var url_string = window.location.href
 	var url = new URL(url_string);
 	var mid = url.searchParams.get("mid");

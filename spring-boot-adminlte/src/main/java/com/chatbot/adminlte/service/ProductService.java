@@ -26,4 +26,8 @@ public class ProductService extends AbstractService<Product, Long> {
         return productRepository.findWithOutStatusDelete();
     }
 
+    public List<Product> findByCategoryAndStatus(long categoryId){
+        return productRepository.findByCategoryAndStatus(categoryId);
+    }
+
 }

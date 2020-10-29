@@ -41,7 +41,7 @@ public class UserRoleApiController {
                 // xoa cac role  k chon
                 boolean flagDelete = roleService.deleteRoleExist( request.getArr(),  user.getId());
                 if (flagDelete) {
-                    List<Role> roleNameListExist = roleService.getRoleNameExistOfUser(request.getArr(),  user.getId());
+                    List<Role> roleNameListExist = roleService.getRoleNameExistOfUser(request.getArr(), user.getId());
                     for (int i = 0; i < request.getArr().size(); i++) {
                         // check role nao can add
                         boolean added = false;

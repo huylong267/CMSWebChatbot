@@ -7,6 +7,8 @@ import com.chatbot.adminlte.service.RoleService;
 import com.chatbot.adminlte.service.UserRoleService;
 import com.chatbot.adminlte.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,24 +32,18 @@ public class UserRoleController {
 
     @GetMapping("/role-control/{id}")
     public String roleControl(@PathVariable long id, Model model) {
-        Optional<User> checkUser =  userService.findById(id);
-        List<Role> listAll = roleService.findAll();
-        List<Role> listRoleNotExistOfUser = roleService.findRoleNotExistOfUser(id);
-        List<UserRole> listUserRoleById = userRoleService.findRoleIdByUserId(checkUser.get().getId());
-        for (UserRole userRole:listUserRoleById) {
-            for (Role role:listAll) {
-                if(userRole.getRoleId().equals(role.getId())){
-                    userRole.setRole(role.getName());
-                }
-            }
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            Optional<User> checkUser = userService.findById(id);
+            model.addAttribute("name",checkUser.get().getUserName());
+            List<Role> listRoleNotExist = roleService.findRoleNotExistOfUser(id);
+            List<Role> listRoleExist = roleService.getRoleNameExistOfUser(null,id);
+            model.addAttribute("listRoleNotExistOfUser", listRoleNotExist);
+            model.addAttribute("listUserRoleById", listRoleExist);
+            return "user-role/list";
+
         }
-
-        checkUser.ifPresent(user -> model.addAttribute("name", user.getUserName()));
-        checkUser.ifPresent(user -> model.addAttribute("id", user.getId()));
-        model.addAttribute("listRoleNotExistOfUser", listRoleNotExistOfUser);
-        model.addAttribute("listUserRoleById", listUserRoleById);
-        return "user-role/list";
-
+        return "redirect:/login";
     }
 
 }
