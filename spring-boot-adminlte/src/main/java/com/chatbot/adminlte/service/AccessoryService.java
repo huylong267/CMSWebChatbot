@@ -25,4 +25,8 @@ public class AccessoryService extends AbstractService<Accessory, Long> {
     public List<Accessory> findByProducts_Id( Long id){
         return accessoryRepository.findAccessoriesByProducts_Id(id);
     }
+
+    public List<Accessory>findByListAccessoryId( List<Long> listId){
+        return  accessoryRepository.findByListAccessoryId(listId);
+    }
 }

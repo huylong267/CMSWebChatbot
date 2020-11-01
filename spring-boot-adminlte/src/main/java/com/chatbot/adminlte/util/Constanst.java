@@ -32,7 +32,8 @@ public interface Constanst {
     enum RESPONSE {
 
         SUCCESS("00","Thanh cong"),
-        FAIL("01","That bai");
+        FAIL("01","That bai"),
+        SUCCESS_FIND_PRODUCTID("03","Thanh cong");
         private final String code;
         private final String description;
 

@@ -13,4 +13,7 @@ import java.util.List;
 public interface AccessoryRepository extends JpaRepository<Accessory, Long> {
 
     List<Accessory> findAccessoriesByProducts_Id( Long id);
+
+    @Query(value = "select * from accessory where id in (:listId)",nativeQuery = true)
+    List<Accessory> findByListAccessoryId(@Param("listId") List<Long> listId);
 }

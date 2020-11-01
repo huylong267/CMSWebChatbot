@@ -24,7 +24,7 @@
         <div class="header-content">
             <div class="row">
                 <div class="col-xs-3 padding-0px">
-                    <img class="img-header-content" src="dist/img/logo-header.png" alt="">
+                    <img class="img-header-content" th:src="@{dist/img/logo-header.png}" alt="">
                 </div>
                 <div class="col-xs-9">
                     <div class="header-block-content">
@@ -45,41 +45,40 @@
             </div>
         </div>
         <div class="banner-main">
-            <img class="img-banner-main" src="dist/img/banner-qc.jpg" alt="">
+            <img class="img-banner-main" th:src="@{dist/img/banner-qc.jpg}" alt="">
         </div>
-        <div class="header-search-mobile search-bar-mobile">
-            <div class="search-box wpo-wrapper-search">
-                <form action="/search" class="searchform searchform-categoris ultimate-search">
-                    <div class="wpo-search-inner">
-                        <input type="hidden" name="type" value="product">
-                        <input required="" id="inputSearchAuto-mb" name="q" maxlength="40" autocomplete="off"
-                               class="searchinput input-search search-input" type="text" size="20"
-                               placeholder="Tìm kiếm sản phẩm..." aria-label="Search">
-                        <span class="close-search"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24"><path
-                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></span>
-                    </div>
-                    <button type="submit" class="btn-search btn" id="search-header-btn-mb" aria-label="Tìm kiếm">
-                        <svg version="1.1" class="svg search" xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27"
-                             style="enable-background:new 0 0 24 27;" xml:space="preserve"><path d="M10,2C4.5,2,0,6.5,0,12s4.5,10,10,10s10-4.5,10-10S15.5,2,10,2z M10,19c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S13.9,19,10,19z"></path>
-                            <rect x="17" y="17" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.2844 19.5856)"
-                                  width="4" height="8"></rect></svg>
-                    </button>
-                </form>
-                <div id="ajaxSearchResults-mb" class="smart-search-wrapper ajaxSearchResults" style="display: none">
-                    <div class="resultsContent"></div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="header-search-mobile search-bar-mobile">-->
+            <!--<div class="search-box wpo-wrapper-search">-->
+                <!--<form action="/search" class="searchform searchform-categoris ultimate-search">-->
+                    <!--<div class="wpo-search-inner">-->
+                        <!--<input type="hidden" name="type" value="product">-->
+                        <!--<input required="" id="inputSearchAuto-mb" name="q" maxlength="40" autocomplete="off"-->
+                               <!--class="searchinput input-search search-input" type="text" size="20"-->
+                               <!--placeholder="Tìm kiếm sản phẩm..." aria-label="Search">-->
+                        <!--<span class="close-search"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"-->
+                                                        <!--viewBox="0 0 24 24"><path-->
+                                <!--d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg></span>-->
+                    <!--</div>-->
+                    <!--<button type="submit" class="btn-search btn" id="search-header-btn-mb" aria-label="Tìm kiếm">-->
+                        <!--<svg version="1.1" class="svg search" xmlns="http://www.w3.org/2000/svg"-->
+                             <!--xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27"-->
+                             <!--style="enable-background:new 0 0 24 27;" xml:space="preserve"><path d="M10,2C4.5,2,0,6.5,0,12s4.5,10,10,10s10-4.5,10-10S15.5,2,10,2z M10,19c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S13.9,19,10,19z"></path>-->
+                            <!--<rect x="17" y="17" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.2844 19.5856)"-->
+                                  <!--width="4" height="8"></rect></svg>-->
+                    <!--</button>-->
+                <!--</form>-->
+                <!--<div id="ajaxSearchResults-mb" class="smart-search-wrapper ajaxSearchResults" style="display: none">-->
+                    <!--<div class="resultsContent"></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
         <div class="addtocart-header">
-            <div class="col-xs-6 header-btn-cart">
-                450,000 d
+            <div class="col-xs-6 header-btn-cart" th:text="${totalAmount}">
             </div>
             <div class="col-xs-6 header-btn-plus">
-                <a href="addtocart.html">Giao hàng (1)</a>
+                <a th:href="@{/addToCart}">Giao hàng <span th:text="${'('+quantity +')'}"></span></a>
             </div>
         </div>
 
@@ -122,7 +121,9 @@
 
             </div>
         </th:block>
+       <div style="width: 100%; padding: 40px">
 
+       </div>
 
 
         <div id="myModal" class="modal">
@@ -185,108 +186,6 @@
 
 </div>
 
-<script type="text/javascript">
-
-    $('body').on('click', '.js-link', function (e) {
-        e.preventDefault();
-        boxAccount($(this).attr('aria-controls'));
-    });
-    $('.site_account input').blur(function () {
-        var tmpval = $(this).val();
-        if (tmpval == '') {
-            $(this).removeClass('is-filled');
-        } else {
-            $(this).addClass('is-filled');
-        }
-    });
-    $('.header-action-toggle').click(function (e) {
-        e.preventDefault();
-        if ($(this).parents('.header-action').hasClass('show-action')) {
-            $('body').removeClass('locked-scroll');
-            $(this).parents('.header-action').removeClass('show-action');
-        } else {
-            $('.header-action').removeClass('show-action');
-            $('body').addClass('locked-scroll');
-            $(this).parents('.header-action').addClass('show-action');
-        }
-    });
-    $('body').on('click', '#site-overlay', function (e) {
-        $('body').removeClass('locked-scroll');
-        $('.header-action').removeClass('show-action');
-    });
-
-    //menu-mobile
-    $('.list-root li a').click(function (e) {
-        if ($(this).find('i').length) {
-            e.preventDefault();
-            var menu_child_id = $(this).parent().data('menu-root');
-            $('.list-root').addClass('mm-subopened');
-            $('#' + menu_child_id).addClass('mm-opened');
-        }
-    })
-    $('.list-child li:first-child a').click(function () {
-        $(this).parents('.list-child').removeClass('mm-opened');
-        $('.list-root').removeClass('mm-subopened');
-    })
-    $('.list-child li.level-2 a').click(function (e) {
-        if ($(this).find('i').length) {
-            e.preventDefault();
-            var menu_sub_id = $(this).parent().data('menu-root');
-            $('li.level-2').addClass('mm-subopened');
-            $('#' + menu_sub_id).addClass('mm-sub');
-        }
-    })
-    $('.sub-child li:first-child a').click(function () {
-        $(this).parents('.sub-child').removeClass('mm-sub');
-        $('.list-child').removeClass('mm-subopened');
-    })
-    $(document).on("click", ".sub-child li.level-3 a", function (e) {
-        if ($(this).find('i').length) {
-            e.preventDefault();
-            var menu_subnav_id = $(this).parent().data('menu-root');
-            $('li.level-3').addClass('mm-open-3');
-            $('#' + menu_subnav_id).addClass('mm-sub-3');
-        }
-    });
-    $(document).on("click", ".sub-child-3 li:first-child a", function (e) {
-        $(this).parents('.sub-child-3').removeClass('mm-sub-3');
-        $('.sub-child').removeClass('mm-open-3');
-    });
-    jQuery('.title_block').click(function () {
-        $(this).next().slideToggle('medium');
-    });
-    $(document).on("click", ".dropdown-filter", function () {
-        if ($(this).parent().attr('aria-expanded') == 'false') {
-            $(this).parent().attr('aria-expanded', 'true');
-        } else {
-            $(this).parent().attr('aria-expanded', 'false');
-        }
-    });
-    // Mainmenu sidebar
-    $(document).on("click", "span.icon-subnav", function () {
-        if ($(this).parent().hasClass('active')) {
-            $(this).parent().removeClass('active');
-            $(this).siblings('ul').slideUp();
-        } else {
-            if ($(this).parent().hasClass("level0") || $(this).parent().hasClass("level1")) {
-                $(this).parent().siblings().find("ul").slideUp();
-                $(this).parent().siblings().removeClass("active");
-            }
-            $(this).parent().addClass('active');
-            $(this).siblings('ul').slideDown();
-        }
-    });
-    // Menu sidebar
-    $(document).on('click', '.tree-menu .tree-menu-lv1', function () {
-        $this = $(this).find('.tree-menu-sub');
-        $('.tree-menu .has-child .tree-menu-sub').not($this).slideUp('fast');
-        $(this).find('.tree-menu-sub').slideToggle('fast');
-        $(this).toggleClass('menu-collapsed');
-        $(this).toggleClass('menu-uncollapsed');
-        var $this1 = $(this);
-        $('.tree-menu .has-child').not($this1).removeClass('menu-uncollapsed');
-    });
-</script>
 
 </body>
 

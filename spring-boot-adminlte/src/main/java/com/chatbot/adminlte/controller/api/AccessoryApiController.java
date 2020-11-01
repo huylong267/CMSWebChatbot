@@ -46,13 +46,20 @@ public class AccessoryApiController {
                 result.setErrorDescription(Constanst.RESPONSE.SUCCESS.getDescription());
                 result.setData(list);
             } else {
-                result.setErrorCode(Constanst.RESPONSE.FAIL.getCode());
-                result.setErrorDescription(Constanst.RESPONSE.FAIL.getDescription());
+                Product product = productService.get(productId);
+                if (product != null){
+                    result.setData(product);
+                    result.setErrorCode(Constanst.RESPONSE.SUCCESS_FIND_PRODUCTID.getCode());
+                    result.setErrorDescription(Constanst.RESPONSE.SUCCESS_FIND_PRODUCTID.getDescription());
+                }else {
+                    result.setErrorCode(Constanst.RESPONSE.FAIL.getCode());
+                    result.setErrorDescription(Constanst.RESPONSE.FAIL.getDescription());
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
             result.setErrorCode(Constanst.RESPONSE.FAIL.getCode());
-            result.setErrorDescription(Constanst.RESPONSE.FAIL.getDescription());
+            result.setErrorDescription(e.getMessage());
         }
         return result;
 
