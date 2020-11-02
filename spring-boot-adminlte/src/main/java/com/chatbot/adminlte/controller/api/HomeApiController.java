@@ -97,9 +97,37 @@ public class HomeApiController {
         BaseApiResult result = new BaseApiResult();
         try {
             List<AddToCartRequest> listCart = (List<AddToCartRequest>) request.getSession().getAttribute("listCart");
-            listCart = listCart.stream().filter(c -> !c.getId().equals(cartId)).collect(Collectors.toList());
-            request.getSession().setAttribute("listCart", listCart);
+            List<AddToCartRequest> listCartFilter = listCart.stream().filter(c -> !c.getId().equals(cartId)).collect(Collectors.toList());
+            request.getSession().setAttribute("listCart", listCartFilter);
+            Integer quantitySS = (Integer) request.getSession().getAttribute("quantity");
+            Integer totalAmountSS = (Integer) request.getSession().getAttribute("totalAmount");
+            if (quantitySS == null) {
+                request.getSession().setAttribute("quantity", listCartFilter.size() );
+            } else {
+                request.getSession().setAttribute("quantity", listCartFilter.size());
+            }
+            final long[] totalPriceProduct = {0};
+            final long[] totalPriceTopping = {0};
+            AddToCartRequest addToCartRequest = listCart.stream().filter(c -> c.getId().equals(cartId)).findAny().orElse(new AddToCartRequest());
+            Product product = productService.get(addToCartRequest.getProductId());
+            if (!addToCartRequest.getAccessoryId().isEmpty()) {
+                List<Accessory> accessories = accessoryService.findByListAccessoryId(addToCartRequest.getAccessoryId());
+                if (!accessories.isEmpty()) {
+                    accessories.forEach(a -> {
+                        totalPriceTopping[0] += a.getPrice();
+                    });
 
+                }
+            }
+            totalPriceProduct[0] += product.getPrice() * addToCartRequest.getQuantity();
+
+            if (totalAmountSS == null) {
+                totalAmountSS = Math.toIntExact((totalAmountSS - (totalPriceProduct[0] + totalPriceTopping[0])));
+                request.getSession().setAttribute("totalAmount",totalAmountSS );
+            } else {
+                totalAmountSS = Math.toIntExact((totalAmountSS - (totalPriceProduct[0] + totalPriceTopping[0])));
+                request.getSession().setAttribute("totalAmount", totalAmountSS);
+            }
             result.setErrorCode(Constanst.RESPONSE.SUCCESS.getCode());
             result.setErrorDescription(Constanst.RESPONSE.SUCCESS.getDescription());
         } catch (Exception e) {

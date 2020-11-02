@@ -41,16 +41,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AuthenticationSuccessHandler authenticationSuccessHandler;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/bootstrap/**", "/dist/**", "/plugins/**","/link/**","/api/**").permitAll()
-                .antMatchers("/home").permitAll()
+                .antMatchers("/home**").permitAll()
+                .antMatchers("/addToCart").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/**").permitAll()
                 .antMatchers("/dashboard").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/role/**").hasRole( "ADMIN")
+                .antMatchers("/product/**").hasRole( "PRODUCT")
+                .antMatchers("/category/**").hasRole( "CATEGORY")
+                .antMatchers("/accessory/**").hasRole( "ACCESSORY")
+                .antMatchers("/customer/**").hasRole( "CUSTOMER")
+                .antMatchers("/user/**").hasRole( "ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -67,8 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/403")
                 .and()
                 .sessionManagement().sessionFixation().newSession()
+//                .invalidSessionUrl("/login")
                 .sessionAuthenticationErrorUrl("/login")
-                .invalidSessionUrl("/login")
                 .maximumSessions(-1) // Number of concurrent session
                 .expiredUrl("/login");
 
